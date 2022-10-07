@@ -1,0 +1,264 @@
+ <!--MAKE a webpage with a scrolling animation effect when clicking on buttons-->
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled-1</title>
+<style type="text/css">
+body {
+    background-color: #000;
+}
+#container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+}
+#container #content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+    line-height: 100%;
+
+   
+}
+#container #content #section1 {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #f00;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+#container #content #section2 {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #0f0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    
+}
+#container #content #section3 {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #00f;
+    position: absolute;
+    top: 200%;
+    left: 0;
+
+
+}
+
+</style>
+</head>
+
+<body>
+<div id="container">
+    <div id="content">
+        <h1>click</h1>
+        <!--add the text that will fade in-->
+        <div id="section1">
+           <!--add image -->
+           <img src="wake.jpg" alt="image" width="100%" height="100%">
+    </div>
+
+        <div id="section2">
+            <img src="4401904.jpg" alt="image" width="100%" height="100%">
+</div>
+
+        <div id="section3">
+
+            <img src="sleep.jpg" alt="image" width="100%" height="100%">
+
+        </div>
+        </div>
+</div>
+<script type="text/javascript">
+    var container = document.getElementById("container");
+    var content = document.getElementById("content");
+    var section1 = document.getElementById("section1");
+    var section2 = document.getElementById("section2");
+    var section3 = document.getElementById("section3");
+    var section1Height = section1.offsetHeight;
+    var section2Height = section2.offsetHeight;
+    var section3Height = section3.offsetHeight+section2.offsetHeight;
+    var scrollAmount = 0;
+    var scrollSpeed = 10;
+    var scrollInterval = 10;
+    var scrollIntervalup = 2;
+    var scrollIntervalID;
+    var scrollDirection = "down";
+    var scrollTargetHeight = section2Height;
+
+
+
+    function scrollDown() {
+        scrollDirection = "down";
+        scrollIntervalID = setInterval(scroll, scrollInterval);
+    }
+
+    function scroll() {
+        if (scrollDirection == "down") {
+            scrollAmount += scrollSpeed;
+            if (scrollAmount >= scrollTargetHeight) {
+                scrollAmount = scrollTargetHeight;
+                clearInterval(scrollIntervalID);
+            }
+        }
+        content.style.top = "-" + scrollAmount + "px";
+    }
+//make on click function to scroll up to first section if the current target is section 3
+    function scrollUp() {
+        scrollDirection = "up";
+        scrollIntervalID = setInterval(scrollu, scrollIntervalup);
+    }
+    //change target to section 1 then scroll to it
+    function scrollu() {
+        if (scrollDirection == "up") {
+            scrollAmount -= scrollSpeed;
+            if (scrollAmount <= 0) {
+                scrollAmount = 0;
+                clearInterval(scrollIntervalID);
+            }
+        }
+        content.style.top = "-" + scrollAmount + "px";
+    }
+    
+    
+    
+
+
+
+ //make Fade-in Transition for the text on Scroll
+    var text1 = document.getElementById("section1");
+    var text2 = document.getElementById("section2");
+    var text3 = document.getElementById("section3");
+    var text1Height = text1.offsetHeight;
+    var text2Height = text2.offsetHeight;
+    var text3Height = text3.offsetHeight+text2.offsetHeight;
+    var scrollAmount = 0;
+    var scrollSpeed = 10;
+    var scrollInterval = 10;
+    var scrollIntervalup = 2;
+    var scrollIntervalID;
+    var scrollDirection = "down";
+    var scrollTargetHeight = text2Height;
+    var text1Opacity = 0;
+    var text2Opacity = 0;
+    var text3Opacity = 0;
+    var text1OpacityTarget = 1;
+    var text2OpacityTarget = 1;
+    var text3OpacityTarget = 1;
+    var text1OpacitySpeed = 0.01;
+    var text2OpacitySpeed = 0.01;
+    var text3OpacitySpeed = 0.01;
+    var text1OpacityInterval = 10;
+    var text2OpacityInterval = 10;
+    var text3OpacityInterval = 10;
+    var text1OpacityIntervalID;
+    var text2OpacityIntervalID;
+    var text3OpacityIntervalID;
+    var text1OpacityDirection = "up";
+    var text2OpacityDirection = "up";
+    var text3OpacityDirection = "up";
+
+    function text1FadeIn() {
+        text1OpacityDirection = "up";
+        text1OpacityIntervalID = setInterval(text1Fade, text1OpacityInterval);
+    }
+
+    function text1Fade() {
+        if (text1OpacityDirection == "up") {
+            text1Opacity += text1OpacitySpeed;
+            if (text1Opacity >= text1OpacityTarget) {
+                text1Opacity = text1OpacityTarget;
+                clearInterval(text1OpacityIntervalID);
+            }
+        }
+        text1.style.opacity = text1Opacity;
+    }
+
+    function text2FadeIn() {
+        text2OpacityDirection = "up";
+        text2OpacityIntervalID = setInterval(text2Fade, text2OpacityInterval);
+    }
+
+    function text2Fade() {
+        if (text2OpacityDirection == "up") {
+            text2Opacity += text2OpacitySpeed;
+            if (text2Opacity >= text2OpacityTarget) {
+                text2Opacity = text2OpacityTarget;
+                clearInterval(text2OpacityIntervalID);
+            }
+        }
+        text2.style.opacity = text2Opacity;
+    }
+
+    function text3FadeIn() {
+        text3OpacityDirection = "up";
+        text3OpacityIntervalID = setInterval(text3Fade, text3OpacityInterval);
+    }
+
+    function text3Fade() {
+        if (text3OpacityDirection == "up") {
+            text3Opacity += text3OpacitySpeed;
+            if (text3Opacity >= text3OpacityTarget) {
+                text3Opacity = text3OpacityTarget;
+                clearInterval(text3OpacityIntervalID);
+            }
+        }
+        text3.style.opacity = text3Opacity;
+    }
+
+    section1.onclick = function() {
+        scrollTargetHeight = text2Height;
+        text1FadeIn();
+        setTimeout(function() {
+            scrollDown();
+        }, 1000);
+
+  
+    }
+    section2.onclick = function() {
+        scrollTargetHeight = text3Height;
+        text2FadeIn();
+        //setTimeout for the scroll to start after the text fades in
+        setTimeout(function() {
+            scrollDown();
+        }, 1000);
+
+
+
+
+    }
+    section3.onclick = function() {
+        scrollTargetHeight = text1Height;
+        text3FadeIn();
+        //set delay for the scroll up
+        setTimeout(function() {
+        scrollUp();
+        }, 1000);
+     
+    }
+    
+
+</script>
+
+
+
+</body>
+</html>
+
+    
